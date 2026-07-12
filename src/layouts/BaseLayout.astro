@@ -3,10 +3,18 @@ import "../styles/styles.css";
 
 interface Props {
   title: string;
+  description?: string;
   bodyClass?: string;
 }
 
-const { title, bodyClass } = Astro.props;
+const {
+  title,
+  description = "Gestión inteligente del agua y prevención de fugas en campus o comunidades.",
+  bodyClass,
+} = Astro.props;
+
+const ogImageURL = new URL("/logo.png", Astro.url).toString();
+const pageURL = Astro.url.toString();
 ---
 
 <!doctype html>
@@ -15,6 +23,22 @@ const { title, bodyClass } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:url" content={pageURL} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
