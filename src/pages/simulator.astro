@@ -1,20 +1,13 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AquaSmart | Simulador de Red</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="simulator.css" />
-  </head>
-  <body class="simulator-shell">
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/simulator.css";
+---
+
+<BaseLayout title="AquaSmart | Simulador de Red" bodyClass="simulator-shell">
     <header class="sim-topbar">
       <span class="brand"><span class="brand-drop">◈</span><span>AquaSmart<small>Simulador de Red</small></span></span>
       <div class="sim-status"><span class="live-dot"></span> Simulación en curso — <span id="sim-clock"></span></div>
-      <a class="secondary" href="index.html" target="_blank" rel="noopener">↗ Abrir Dashboard</a>
+      <a class="secondary" href="/" target="_blank" rel="noopener">↗ Abrir Dashboard</a>
     </header>
 
     <div class="sim-layout">
@@ -80,9 +73,8 @@
     </div>
 
     <div id="toast" role="status"></div>
-    <script src="konva.min.js"></script>
-    <script src="sim-data.js?v=11"></script>
-    <script src="sim-engine.js?v=11"></script>
-    <script src="simulator.js?v=11"></script>
-  </body>
-</html>
+    <script src="/konva.min.js" is:inline></script>
+    <script src="/sim-data.js?v=11" is:inline></script>
+    <script src="/sim-engine.js?v=11" is:inline></script>
+    <script src="/simulator.js?v=11" is:inline></script>
+</BaseLayout>
