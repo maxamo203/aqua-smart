@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AquaSmart | Simulador de Red</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="simulator.css" />
+  </head>
+  <body class="simulator-shell">
+    <header class="sim-topbar">
+      <span class="brand"><span class="brand-drop">◈</span><span>AquaSmart<small>Simulador de Red</small></span></span>
+      <div class="sim-status"><span class="live-dot"></span> Simulación en curso — <span id="sim-clock"></span></div>
+      <a class="secondary" href="index.html" target="_blank" rel="noopener">↗ Abrir Dashboard</a>
+    </header>
+
+    <div class="sim-layout">
+      <section class="sim-stage-wrap">
+        <div class="card-title"><h3>Plano del Campus</h3><span class="eyebrow" id="stage-hint">CLIC EN UNA CAÑERÍA O SENSOR PARA INTERACTUAR</span></div>
+        <div id="sim-stage" class="sim-stage"></div>
+        <div class="sim-legend">
+          <span><i class="dot healthy"></i> Operativo</span>
+          <span><i class="dot warning"></i> Advertencia</span>
+          <span><i class="dot danger"></i> Crítico</span>
+          <span><i class="dot offline"></i> Fuera de línea</span>
+          <div class="mode-switch" role="group" aria-label="Modo del editor">
+            <button class="mode-btn selected" data-mode="view">▶ Ver</button>
+            <button class="mode-btn" data-mode="move">✥ Mover</button>
+            <button class="mode-btn" data-mode="add">＋ Agregar</button>
+          </div>
+        </div>
+        <p class="mode-instructions" id="mode-instructions" hidden></p>
+        <div class="coord-panel" id="coord-panel" hidden>
+          <div class="card-title"><h3>Objetos nuevos / actualizados</h3><button class="secondary" id="btn-copy-coords">⧉ Copiar todo</button></div>
+          <p class="eyebrow">SENSORES</p>
+          <pre id="coord-output-sensors"></pre>
+          <p class="eyebrow">CAÑERÍAS</p>
+          <pre id="coord-output-pipes"></pre>
+        </div>
+
+        <article class="card sim-controls quality-panel">
+          <h3>Calidad de Agua</h3>
+          <div class="sim-control-group">
+            <label>Sólidos disueltos <strong id="solids-value">12 ppm</strong></label>
+            <input type="range" id="solids-slider" min="0" max="60" value="12" />
+          </div>
+          <div id="quality-controls" class="quality-grid"></div>
+        </article>
+      </section>
+
+      <aside class="sim-panel">
+        <article class="card sim-controls">
+          <h3>Controles de Escenario</h3>
+          <div class="sim-control-group">
+            <label>Demanda global <strong id="demand-value">1.0×</strong></label>
+            <input type="range" id="demand-slider" min="50" max="160" value="100" />
+          </div>
+          <div class="sim-control-group">
+            <span class="eyebrow">CAÑERÍAS (clic para ciclar ok → fuga → rotura → ok)</span>
+            <div id="pipe-controls" class="sim-chip-list"></div>
+          </div>
+          <div class="sim-control-group">
+            <span class="eyebrow">SENSORES (clic para online/offline)</span>
+            <div id="sensor-controls" class="sim-chip-list"></div>
+          </div>
+          <div class="sim-control-group">
+            <button class="primary" id="btn-contamination">☣ Simular Contaminación (Laboratorios)</button>
+            <button class="secondary" id="btn-reset">↺ Reiniciar Escenario</button>
+          </div>
+        </article>
+
+        <article class="card sim-log">
+          <h3>Registro de Eventos</h3>
+          <ul id="sim-event-log"><li class="empty">Sin eventos todavía.</li></ul>
+        </article>
+      </aside>
+    </div>
+
+    <div id="toast" role="status"></div>
+    <script src="konva.min.js"></script>
+    <script src="sim-data.js?v=11"></script>
+    <script src="sim-engine.js?v=11"></script>
+    <script src="simulator.js?v=11"></script>
+  </body>
+</html>

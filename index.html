@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AquaSmart | Water Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#overview" aria-label="AquaSmart inicio"><span class="brand-drop">◈</span><span>Aqua<span>Smart</span><small>Water Management</small></span></a>
+        <nav class="nav" aria-label="Navegación principal">
+          <button class="nav-link active" data-page="overview"><i>▦</i> Overview</button>
+          <button class="nav-link" data-page="sensors"><i>◉</i> Sensors</button>
+          <button class="nav-link" data-page="alerts"><i>♧</i> Alerts <b id="alert-badge">3</b></button>
+          <button class="nav-link" data-page="quality"><i>◈</i> Quality</button>
+          <button class="nav-link" data-page="reports"><i>▣</i> Reports</button>
+        </nav>
+        <div class="nav footer-nav">
+          <button class="nav-link" data-page="settings"><i>⚙</i> Settings</button>
+          <button class="nav-link"><i>?</i> Support</button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <label class="search"><span>⌕</span><input id="site-search" type="search" placeholder="Buscar sensores, alertas o reportes..." /></label>
+          <div class="top-actions"><button class="demo-trigger" aria-label="Probar vista responsive">▣ <span>Vistas</span></button><button class="icon-button" aria-label="Notificaciones">♧<em></em></button><button class="icon-button" aria-label="Configuración">⚙</button><div class="avatar">AR</div><span class="user-name">Admin Usuario</span></div>
+        </header>
+
+        <section id="overview" class="page active">
+          <div class="page-heading"><div><p class="eyebrow">VISTA GENERAL</p><h1>Resumen General</h1><p>Estado actual de la red de gestión hídrica</p></div><button class="primary" data-toast="Datos exportados correctamente">⇩ Exportar datos</button></div>
+          <div class="stats-grid four">
+            <article class="stat-card"><span>CONSUMO HOY</span><strong class="blue">1,284<small> m³</small></strong><p class="good">↘ 12% menos que ayer</p></article>
+            <article class="stat-card"><span>SENSORES ACTIVOS</span><strong id="stat-active-sensors">18<small> / 20</small></strong><p>2 unidades en mantenimiento</p></article>
+            <article class="stat-card"><span>ALERTAS ACTIVAS</span><strong class="red" id="stat-active-alerts">2</strong><p class="red">◉ Atención inmediata requerida</p></article>
+            <article class="stat-card"><span>CALIDAD DE AGUA</span><strong class="olive">98.2<small>%</small></strong><p>Índice de pureza óptimo</p></article>
+          </div>
+          <div class="two-col overview-grid">
+            <article class="card chart-card"><div class="card-title"><h3>Consumo Semanal</h3><div class="toggle"><button>7D</button><button class="selected">30D</button></div></div><div class="bar-chart"><i style="--h:61%"></i><i style="--h:78%"></i><i style="--h:47%"></i><i style="--h:94%"></i><i style="--h:66%"></i><i style="--h:43%"></i><i style="--h:32%"></i></div><div class="chart-labels"><span>LUN</span><span>MAR</span><span>MIÉ</span><span>JUE</span><span>VIE</span><span>SÁB</span><span>DOM</span></div></article>
+            <article class="card activity"><h3>Actividad Reciente</h3><ul><li class="danger"><b>!</b><span>Alerta de fuga detectada<small>Sector B-12 · Hace 14m</small></span></li><li><b>✓</b><span>Sensor 04 calibrado<small>Mantenimiento preventivo · Hace 2h</small></span></li><li><b>↓</b><span>Reporte mensual generado<small>Sistema automático · Hace 4h</small></span></li><li><b>i</b><span>Actualización de firmware<small>Nodos 01-18 · Hace 8h</small></span></li></ul><a href="#alerts" class="text-link">Ver todo el historial</a></article>
+          </div>
+          <article class="card table-card"><div class="card-title"><h3>Nodos de Sensores Activos</h3><span class="status healthy">● Operativo</span></div><div class="table-wrap"><table><thead><tr><th>ID NODO</th><th>UBICACIÓN</th><th>FLUJO ACTUAL</th><th>PRESIÓN</th><th>BATERÍA</th><th>ESTADO</th></tr></thead><tbody id="overview-sensor-rows"></tbody></table></div></article>
+        </section>
+
+        <section id="sensors" class="page">
+          <div class="page-heading"><div><p class="eyebrow">INFRAESTRUCTURA / <span>INVENTARIO DE SENSORES</span></p><h1>Gestión de Sensores</h1><p>Supervisión en tiempo real de 124 dispositivos activos en el sistema.</p></div><button class="primary" data-toast="Formulario para añadir sensor abierto">＋ Añadir sensor</button></div>
+          <div class="stats-grid four compact"><article class="mini-stat"><span>◉</span><div>ONLINE<strong>118</strong></div></article><article class="mini-stat red-icon"><span>!</span><div>ALERTAS<strong>4</strong></div></article><article class="mini-stat"><span>▣</span><div>BATERÍA BAJA<strong>2</strong></div></article><article class="mini-stat"><span>◉</span><div>OFFLINE<strong>6</strong></div></article></div>
+          <article class="card table-card"><div class="card-title"><h3>Inventario de sensores</h3><button class="filter">Filtrar ▾</button></div><div class="table-wrap"><table><thead><tr><th>NODE ID</th><th>UBICACIÓN</th><th>ESTADO</th><th>CAUDAL (FLOW RATE)</th><th>NIVEL DE BATERÍA</th><th>ACCIONES</th></tr></thead><tbody id="sensor-rows"></tbody></table></div><footer class="table-footer">Mostrando 1 - 6 de 124 sensores <span>‹ <b>1</b> 2 3 … 13 ›</span></footer></article>
+          <div class="two-col"><article class="card chart-card short"><div class="card-title"><h3>Historial de Transmisiones</h3><a class="text-link">VER TODO</a></div><div class="bar-chart small"><i style="--h:25%"></i><i style="--h:55%"></i><i style="--h:38%"></i><i style="--h:75%"></i><i style="--h:48%"></i><i style="--h:18%"></i><i style="--h:61%"></i></div></article><article class="dark-card"><h3>Salud de la Red</h3><strong>98%</strong><p>La topología Mesh está operando al 98% de eficiencia.</p></article></div>
+        </section>
+
+        <section id="alerts" class="page">
+          <div class="page-heading"><div><h1>Alertas Activas <mark class="danger"><span id="critical-count">3</span> Críticas</mark></h1><p>Monitoreo y respuesta de incidencias de la red.</p></div><button class="primary" data-toast="Se marcó todo como leído">✓ Marcar leídas</button></div>
+          <div class="stats-grid three"><article class="stat-card"><span>TOTAL ALERTAS</span><strong>14</strong></article><article class="stat-card"><span>TIEMPO DE RESPUESTA</span><strong>12m</strong></article><article class="stat-card"><span>SALUD DEL SISTEMA</span><strong>94%</strong></article></div>
+          <div class="tabs" data-tabs="alerts"><button class="selected">Todas</button><button>Críticas (3)</button><button>Advertencias (5)</button><button>Informativas (6)</button></div>
+          <article class="card table-card"><div class="table-wrap"><table><thead><tr><th>ESTADO</th><th>ID SENSOR</th><th>TIPO DE ALERTA</th><th>UBICACIÓN</th><th>HORA</th><th>ACCIONES</th></tr></thead><tbody id="alert-rows"></tbody></table></div></article>
+          <div class="two-col"><article class="card map"><div class="card-title"><div><h3>Ubicación Geográfica de Alertas</h3><p>Sector Industrial Sur</p></div><button class="filter">⌕</button></div><div class="map-grid"><span class="pin p1" data-sector="sector-a"></span><span class="pin p2" data-sector="sector-c"></span><span class="pin p3" data-sector="sector-d"></span><span class="map-label" id="map-label">Sin incidentes activos</span></div></article><article class="dark-card timeline"><h3>Historial Reciente</h3><ul><li><b>14:55</b> Revisión de fuga en Sector 4</li><li><b>14:40</b> Alerta de presión elevada</li><li><b>13:45</b> Sensor en modo ahorro</li></ul></article></div>
+        </section>
+
+        <section id="quality" class="page">
+          <div class="page-heading"><div><p class="eyebrow">MONITOREO AVANZADO</p><h1>Analítica de Calidad de Agua</h1><p>Monitoreo en tiempo real de componentes químicos y microbiológicos.</p></div><button class="primary" data-toast="Informe de calidad descargado">⇩ Exportar informe</button></div>
+          <div class="quality-circles"><article class="card circle-card"><div class="ring success" id="ring-purity"><b id="stat-purity">98.4%</b></div><h3>Pureza Química</h3><p class="good" id="stat-purity-trend">↗ +0.2% hoy</p></article><article class="card circle-card"><div class="ring blue-ring"><b id="stat-solids">12 <small>ppm</small></b></div><h3>Sólidos Disueltos</h3><p>▣ ESTABLE</p></article><article class="card circle-card"><div class="ring olive-ring" id="ring-contaminants"><b id="stat-contaminants">0%</b></div><h3>Nivel de Contaminantes</h3><p class="good" id="stat-contaminants-label">✓ SEGURIDAD TOTAL</p></article></div>
+          <div class="two-col quality-content"><article class="card table-card"><div class="card-title"><h3>♧ Análisis por Componente</h3><span id="quality-updated">ÚLTIMA ACTUALIZACIÓN: 08:45 AM</span></div><div class="table-wrap"><table><thead><tr><th>COMPONENTE</th><th>CONCENTRACIÓN</th><th>ESTADO DE SEGURIDAD</th><th>TENDENCIA</th></tr></thead><tbody id="quality-rows"></tbody></table></div></article><article class="dark-card history"><h3>↻ Historial 24h</h3><div class="mini-graph" id="quality-history"></div><p id="quality-summary">Todos los niveles se mantienen dentro de los rangos de seguridad establecidos por la OMS.</p></article></div>
+        </section>
+
+        <section id="reports" class="page">
+          <div class="page-heading"><div><p class="eyebrow">INFORMES Y ANALÍTICA</p><h1>Análisis de Consumo</h1><p>Informe detallado del rendimiento hídrico del complejo.</p></div><button class="primary" data-toast="El PDF se está preparando">▣ Exportar PDF</button></div>
+          <div class="report-grid"><article class="card line-chart"><div class="card-title"><div><h3>Historial de Consumo (m³)</h3><p>Últimos 30 días</p></div><div class="toggle"><button class="selected">● Este Mes</button><button>● Mes Pasado</button></div></div><svg viewBox="0 0 620 280" aria-label="Gráfico de consumo"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2458f5" stop-opacity=".22"/><stop offset="1" stop-color="#2458f5" stop-opacity="0"/></linearGradient></defs><g class="gridlines"><path d="M0 35H620M0 80H620M0 125H620M0 170H620M0 215H620M0 260H620"/><path d="M40 0V270M90 0V270M140 0V270M190 0V270M240 0V270M290 0V270M340 0V270M390 0V270M440 0V270M490 0V270M540 0V270M590 0V270"/></g><path class="area" d="M0,180 C60,170 110,150 160,135 S255,132 310,140 S400,120 450,105 S550,70 620,100 L620,270 L0,270Z"/><path class="line" d="M0,180 C60,170 110,150 160,135 S255,132 310,140 S400,120 450,105 S550,70 620,100"/><path class="dashed" d="M0,200 C70,210 120,180 175,190 S270,235 330,210 S430,145 500,175 S565,205 620,185"/></svg></article><article class="dark-card sustainability"><h3>◈ Sostenibilidad</h3><p>Resumen de eficiencia y ahorro de recursos este trimestre.</p><div><span>Eficiencia Operativa</span><strong>94.2%</strong></div><div class="progress"><i style="width:94%"></i></div><article><span>Litros Ahorrados</span><b>12,480<small>L</small></b></article></article></div>
+          <div class="stats-grid four report-stats"><article class="stat-card"><span>CONSUMO ACTUAL</span><strong>1,248<small> m³</small></strong></article><article class="stat-card"><span>MES PASADO</span><strong>1,120<small> m³</small></strong></article><article class="stat-card"><span>DETECCIÓN DE FUGAS</span><strong class="olive">0<small> Activas</small></strong></article><article class="stat-card"><span>COSTO ESTIMADO</span><strong>$4,820<small>.50 USD</small></strong></article></div>
+        </section>
+
+        <section id="settings" class="page">
+          <div class="page-heading"><div><p class="eyebrow">ADMINISTRACIÓN</p><h1>Configuración del Sistema</h1><p>Gestione las preferencias globales, umbrales de seguridad y perfiles de usuario.</p></div></div>
+          <div class="settings-grid"><div><article class="card profile"><h3>♙ Perfil de Usuario</h3><label>Nombre Completo<input value="Ricardo Alarcón" /></label><label>Correo Electrónico<input value="r.alarcon@aquasmart.com" /></label><label>Rol de Sistema<input value="FACILITY_ADMIN_L2" disabled /></label><button class="primary" data-toast="Perfil actualizado">Actualizar Perfil</button></article><article class="dark-card hub"><h3>Estado del Hub</h3><p>Última sincronización <b>Hace 2 min</b></p><p>Sensores Activos <b>42 / 42</b></p><p>Versión del Firmware <b>v2.4.1-rc</b></p></article></div><div><article class="card notifications"><h3>⌘ Canales de Notificación <mark class="healthy">Activo</mark></h3><label>✉ <span>Correo Electrónico<small>Alertas críticas y reportes semanales.</small></span><input type="checkbox" checked /></label><label>▣ <span>SMS / Mensajería<small>Alertas de inundación y presión crítica.</small></span><input type="checkbox" /></label><label>♧ <span>Notificaciones Push<small>Actualizaciones en tiempo real en dispositivos móviles.</small></span><input type="checkbox" checked /></label></article><article class="card thresholds"><h3>☷ Umbrales del Sistema</h3><div class="ranges"><label>Flujo Máximo<strong>120 L/m</strong><input type="range" value="40" /></label><label>Presión Mínima<strong>1.5 bar</strong><input type="range" value="15" /></label></div><button class="primary" data-toast="Umbrales guardados">Guardar Umbrales</button> <button class="secondary">Restaurar Valores por Defecto</button></article></div></div><article class="danger-zone"><h3>⚠ Zona de Peligro</h3><p>Reinicio Maestro de Sensores<br/><small>Esta acción desconectará todos los nodos temporalmente para recalibración.</small></p><button data-toast="Solicitud de reinicio registrada">REINICIAR SISTEMA</button></article>
+        </section>
+      </main>
+    </div>
+    <section class="device-demo" aria-hidden="true">
+      <div class="demo-panel" role="dialog" aria-modal="true" aria-labelledby="demo-title">
+        <button class="close-demo" aria-label="Cerrar previsualización">×</button>
+        <p class="eyebrow">PRESENTACIÓN RESPONSIVE</p>
+        <h2 id="demo-title">AquaSmart en cada pantalla</h2>
+        <p>Mostrá cómo el tablero se adapta sin perder información relevante.</p>
+        <div class="device-options" role="group" aria-label="Elegir dispositivo">
+          <button class="selected" data-width="1180">▰ <span>Computadora<small>1180 px</small></span></button>
+          <button data-width="768">▤ <span>Tablet<small>768 px</small></span></button>
+          <button data-width="390">▯ <span>Celular<small>390 px</small></span></button>
+        </div>
+        <div class="device-stage"><div class="device-frame" data-width="1180"><iframe title="Previsualización responsive de AquaSmart"></iframe></div></div>
+      </div>
+    </section>
+    <div id="toast" role="status"></div>
+    <script src="sim-data.js?v=3"></script>
+    <script src="sim-engine.js?v=3"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

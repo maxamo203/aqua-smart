@@ -1,0 +1,77 @@
+body.simulator-shell{margin:0;background:var(--navy);color:#e6eaf5;font:12px Manrope,Arial,sans-serif;min-height:100vh}
+.sim-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;border-bottom:1px solid #24345f}
+.sim-topbar .brand{display:flex;align-items:center;gap:9px;color:#c8f62a;font-size:18px;font-weight:800}
+.sim-topbar .brand .brand-drop{font-size:20px;background:#c8f62a;color:#0a1b3d;border-radius:6px;width:22px;height:22px;text-align:center;display:inline-block}
+.sim-topbar .brand small{display:block;margin-top:2px;font-size:9px;letter-spacing:.5px;color:#8b97b0;font-weight:600}
+.sim-status{display:flex;align-items:center;gap:8px;font:600 11px 'DM Mono';color:#aeb8cc}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#4ee06b;box-shadow:0 0 0 0 #4ee06b88;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #4ee06b66}70%{box-shadow:0 0 0 7px #4ee06b00}100%{box-shadow:0 0 0 0 #4ee06b00}}
+.sim-topbar .secondary{background:transparent;border:1px solid #3c4b6b;color:#dfe4f2;border-radius:5px;padding:8px 13px;font-size:10px;font-weight:700;text-decoration:none}
+.sim-topbar .secondary:hover{border-color:var(--lime);color:var(--lime)}
+
+.sim-layout{display:grid;grid-template-columns:1fr 340px;gap:16px;padding:18px 26px 30px}
+.sim-stage-wrap .card-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.sim-stage-wrap h3{margin:0;font-size:13px;color:#f2f4fa}
+.sim-stage-wrap .eyebrow{font-size:8px;font-weight:800;letter-spacing:.5px;color:#7c88a4!important}
+.sim-stage{background:#0a1730;border-radius:9px;border:1px solid #24345f;overflow:hidden;line-height:0}
+.sim-stage.mode-move{cursor:grab}
+.sim-stage.mode-add{cursor:crosshair}
+.sim-legend{display:flex;align-items:center;gap:16px;margin-top:10px;font-size:10px;color:#aeb8cc;flex-wrap:wrap}
+.sim-legend .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.dot.healthy{background:#7fbf4d}.dot.warning{background:#e0a41b}.dot.danger{background:#e1252b}.dot.offline{background:#94a0b8}
+.mode-switch{margin-left:auto;display:flex;gap:4px;background:#0a1730;border:1px solid #24345f;border-radius:7px;padding:3px}
+.mode-btn{border:0;background:transparent;color:#8b97b0;border-radius:5px;padding:6px 11px;font-size:10px;font-weight:700;cursor:pointer;transition:.15s}
+.mode-btn:hover{color:#dfe4f2}
+.mode-btn.selected{background:var(--lime);color:#0a1b3d}
+.mode-instructions{margin:8px 0 0;font-size:10px;color:var(--lime);font-weight:700;background:#101f47;border:1px solid #24345f;border-radius:6px;padding:8px 12px}
+
+.coord-panel{margin-top:14px;background:#101f47;border:1px solid #24345f;border-radius:9px;padding:16px}
+.coord-panel .card-title{margin-bottom:8px}
+.coord-panel h3{margin:0;font-size:12px;color:#f2f4fa}
+.coord-panel .secondary{background:transparent;border:1px solid #3c4b6b;color:#dfe4f2;border-radius:5px;padding:6px 11px;font-size:9px;font-weight:700}
+.coord-panel .secondary:hover{border-color:var(--lime);color:var(--lime)}
+.coord-panel .eyebrow{display:block;font-size:8px;font-weight:800;letter-spacing:.5px;color:#7c88a4!important;margin:10px 0 6px}
+.coord-panel .eyebrow:first-of-type{margin-top:0}
+#coord-output-sensors,#coord-output-pipes{margin:0;font:11px/1.6 'DM Mono',monospace;color:#c8f62a;white-space:pre;overflow-x:auto;background:#0a1730;border-radius:6px;padding:12px;max-height:180px;overflow-y:auto}
+#coord-output-pipes{color:#7fd0ff}
+
+.sim-panel{display:flex;flex-direction:column;gap:16px}
+.sim-panel .card,.sim-stage-wrap .card{background:#101f47;border:1px solid #24345f;border-radius:9px;padding:16px}
+.sim-panel h3,.sim-stage-wrap .card h3{margin:0 0 12px;font-size:12px;color:#f2f4fa}
+.sim-control-group{margin-bottom:16px}
+.sim-control-group:last-child{margin-bottom:0}
+.sim-control-group label{display:flex;justify-content:space-between;align-items:baseline;font-size:10px;color:#aeb8cc;margin-bottom:6px}
+.sim-control-group label strong{font:700 13px 'DM Mono';color:var(--lime)}
+.sim-control-group input[type=range]{width:100%;accent-color:var(--lime)}
+.sim-control-group .eyebrow{display:block;font-size:8px;font-weight:800;letter-spacing:.5px;color:#7c88a4!important;margin-bottom:8px}
+.sim-chip-list{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #354874;background:#16244e;color:#c7cfe3;border-radius:5px;padding:7px 10px;font-size:9px;font-weight:700;cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--lime);color:var(--lime)}
+.chip.ok{border-color:#2c4a2a;color:#9fd67f}
+.chip.leak{border-color:#5a4116;color:#f0b94a;background:#26200f}
+.chip.broken{border-color:#5a1f22;color:#f0797e;background:#2a1215}
+.chip.offline{border-color:#3b4258;color:#9aa4bc;background:#1a2136}
+.sim-control-group .primary{width:100%;margin-bottom:8px}
+.sim-control-group .secondary{width:100%;background:transparent;border:1px solid #3c4b6b;color:#dfe4f2}
+
+.quality-panel{margin-top:16px}
+.quality-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:16px 20px}
+.quality-row{border-top:1px solid #24345f;padding-top:12px}
+.quality-row label{display:flex;justify-content:space-between;align-items:baseline;font-size:10px;color:#aeb8cc;margin-bottom:6px}
+.quality-row label strong{font:700 12px 'DM Mono';color:#dfe4f2}
+.quality-row label strong.over{color:#f0797e}
+.quality-row input[type=range]{width:100%;accent-color:var(--lime);margin-bottom:8px}
+.quality-row input[type=range].over{accent-color:#e1252b}
+.quality-row-actions{display:flex;gap:6px}
+.quality-row-actions .chip{flex:1;text-align:center}
+
+@media(max-width:1200px){.quality-grid{grid-template-columns:repeat(2, 1fr)}}
+@media(max-width:640px){.quality-grid{grid-template-columns:1fr}}
+
+.sim-log ul{list-style:none;margin:0;padding:0;max-height:220px;overflow-y:auto}
+.sim-log li{border-left:2px solid var(--lime);padding:0 0 12px 12px;margin-bottom:12px;font-size:10px;color:#aeb8cc}
+.sim-log li:last-child{margin-bottom:0}
+.sim-log li b{display:block;color:var(--lime);font:700 9px 'DM Mono';margin-bottom:2px}
+.sim-log .empty{border-left-color:#3c4b6b;color:#7c88a4}
+
+@media(max-width:900px){.sim-layout{grid-template-columns:1fr}}
