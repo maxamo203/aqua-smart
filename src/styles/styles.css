@@ -655,31 +655,52 @@ mark {
   padding: 18px;
 }
 .ring {
+  --pct: 100;
+  --ring-color: var(--lime);
+  --ring-track: #eff5c7;
+  position: relative;
   width: 95px;
   height: 95px;
-  border: 8px solid var(--lime);
   border-radius: 50%;
   margin: 0 auto 12px;
   display: grid;
   place-items: center;
   font: 700 22px "DM Mono";
-  box-shadow: inset 0 0 0 1px #eff5c7;
+  background: conic-gradient(
+    var(--ring-color) calc(var(--pct) * 1%),
+    var(--ring-track) 0
+  );
+  transition: background 0.4s ease;
+}
+.ring::before {
+  content: "";
+  position: absolute;
+  width: 79px;
+  height: 79px;
+  border-radius: 50%;
+  background: var(--card);
+}
+.ring b,
+.ring small {
+  position: relative;
+  z-index: 1;
 }
 .ring small {
   font: 600 11px Manrope;
 }
 .blue-ring {
-  border-color: #e2e1dc;
-  border-top-color: #2858f5;
-  border-right-color: #2858f5;
+  --pct: 20;
+  --ring-color: #2858f5;
+  --ring-track: #e2e1dc;
 }
 .olive-ring {
-  border-color: #557500;
+  --pct: 0;
+  --ring-color: #557500;
+  --ring-track: #e2e6d8;
 }
 .ring.alert {
-  border-color: #f3c9c2;
-  border-top-color: var(--red);
-  border-right-color: var(--red);
+  --ring-color: var(--red);
+  --ring-track: #f3c9c2;
 }
 .ring.alert b {
   color: var(--red);
@@ -1159,9 +1180,12 @@ mark {
     grid-row: span 2;
     width: 75px;
     height: 75px;
-    border-width: 7px;
     margin: 0;
     font-size: 17px;
+  }
+  .circle-card .ring::before {
+    width: 61px;
+    height: 61px;
   }
   .circle-card p {
     margin: 3px 0;

@@ -76,18 +76,28 @@ function renderQualityPage(state) {
     const def = AquaSim.qualityComponents.find((d) => d.id === c.id);
     return sum + Math.min(1, c.level / def.limit) * 2;
   }, 0)).toFixed(1));
-  const contaminantPct = Math.min(100, unsafeCount * 33);
+  // Promedio continuo de cuánto se acerca (o excede) cada componente a su límite,
+  // en vez de un conteo discreto, para que el anillo avance de forma gradual.
+  const contaminantPct = Math.round(Math.min(100, components.reduce((sum, c) => {
+    const def = AquaSim.qualityComponents.find((d) => d.id === c.id);
+    return sum + Math.min(1.5, c.level / def.limit) * (100 / 1.5) / components.length;
+  }, 0)));
 
   document.querySelector('#stat-purity').textContent = `${purity}%`;
-  document.querySelector('#ring-purity').classList.toggle('alert', unsafeCount > 0);
+  const ringPurity = document.querySelector('#ring-purity');
+  ringPurity.style.setProperty('--pct', purity);
+  ringPurity.classList.toggle('alert', unsafeCount > 0);
   document.querySelector('#stat-purity-trend').textContent = unsafeCount === 0 ? '↗ Dentro de parámetros' : '↘ Requiere atención';
   document.querySelector('#stat-purity-trend').classList.toggle('good', unsafeCount === 0);
   document.querySelector('#stat-purity-trend').classList.toggle('red', unsafeCount > 0);
 
   document.querySelector('#stat-solids').innerHTML = `${state.quality.dissolvedSolids} <small>ppm</small>`;
+  document.querySelector('#ring-solids').style.setProperty('--pct', Math.max(0, Math.min(100, (state.quality.dissolvedSolids / 60) * 100)));
 
   document.querySelector('#stat-contaminants').textContent = `${contaminantPct}%`;
-  document.querySelector('#ring-contaminants').classList.toggle('alert', unsafeCount > 0);
+  const ringContaminants = document.querySelector('#ring-contaminants');
+  ringContaminants.style.setProperty('--pct', contaminantPct);
+  ringContaminants.classList.toggle('alert', unsafeCount > 0);
   const contamLabel = document.querySelector('#stat-contaminants-label');
   contamLabel.textContent = unsafeCount === 0 ? '✓ SEGURIDAD TOTAL' : `⚠ ${unsafeCount} COMPONENTE(S) EN ALERTA`;
   contamLabel.classList.toggle('good', unsafeCount === 0);
@@ -114,6 +124,16 @@ function renderFromState() {
   document.querySelector('#stat-active-alerts').textContent = criticalCount;
   document.querySelector('#critical-count').textContent = criticalCount;
   document.querySelector('#alert-badge').textContent = activeAlerts.length;
+
+  const offlineCount = state.sensors.filter((s) => s.status === 'offline').length;
+  const alertSensorCount = state.sensors.filter((s) => s.status === 'warning' || s.status === 'danger').length;
+  const lowBatteryCount = state.sensors.filter((s) => s.battery <= 15).length;
+  document.querySelector('#stat-sensors-online').textContent = onlineCount;
+  document.querySelector('#stat-sensors-alerts').textContent = alertSensorCount;
+  document.querySelector('#stat-sensors-lowbatt').textContent = lowBatteryCount;
+  document.querySelector('#stat-sensors-offline').textContent = offlineCount;
+  document.querySelector('#sensors-total-count').textContent = state.sensors.length;
+  document.querySelector('#sensors-table-count').textContent = state.sensors.length;
 
   applyResponsiveLabels();
   updateMapPins(activeAlerts);
